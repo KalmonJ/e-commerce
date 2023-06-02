@@ -1,12 +1,18 @@
 export const userResolver = {
   Query: {
-    createUser: () => {
-      return {
-        username: "any username",
-        name: "anyname",
-        email: "email@email",
-        phoneNumber: "(234234)",
-      };
+    users: () => {
+      return [
+        {
+          name: "hello",
+          username: "anyUsername",
+          email: "email",
+          phoneNumber: "dfsdfdf",
+        },
+      ];
     },
+  },
+
+  Mutation: {
+    createUser: () => {},
   },
 };

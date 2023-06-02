@@ -9,14 +9,13 @@ type Query {
   users: [User!]!
 }
 
-type Mutation {
-  createUser(user:InputUser!)
-}
-
-input InputUser {
+input CreateUser {
   username: String!
   name: String!
   email: String!
   phoneNumber: String!
-  image: String
+}
+
+type Mutation {
+  createUser(user: CreateUser): User!
 }
