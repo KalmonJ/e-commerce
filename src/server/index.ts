@@ -1,6 +1,7 @@
 import { ApolloServer, BaseContext } from "@apollo/server";
 import resolvers from "./graphql/resolvers";
 import { typeDefs } from "./graphql/typeDefs";
+import { ServerContext } from "@/lib/context";
 
 export const initializeServer = () => {
   let isServerStarted = false;
@@ -10,9 +11,10 @@ export const initializeServer = () => {
       throw new Error("Server already started.");
     }
     try {
-      const server = new ApolloServer<BaseContext>({
+      const server = new ApolloServer<ServerContext>({
         resolvers: resolvers,
         typeDefs,
+        introspection: process.env.NODE_ENV !== "production",
       });
 
       isServerStarted = true;
