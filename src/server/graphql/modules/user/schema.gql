@@ -4,10 +4,12 @@ type User {
   name: String!
   email: String!
   phoneNumber: String!
+  image: String
 }
 
 type Query {
-  users: [User!]!
+  getUser(id: ID!): User!
+  getByEmail(email: String!): User!
 }
 
 input CreateUser {
@@ -15,6 +17,8 @@ input CreateUser {
   name: String!
   email: String!
   phoneNumber: String!
+  password: String!
+  image: String
 }
 
 type Mutation {
