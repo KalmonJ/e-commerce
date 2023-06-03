@@ -1,1 +1,1 @@
-npm install @apollo/server graphql graphql-tag @as-integrations/next next-auth @graphql-tools/load-files @graphql-tools/merge
+npm install @apollo/server graphql graphql-tag @as-integrations/next next-auth @graphql-tools/load-files @graphql-tools/merge @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-resolvers
