@@ -8,8 +8,8 @@ type User {
 }
 
 type Query {
-  getUser(id: ID!): User!
-  getByEmail(email: String!): User!
+  getUserById(id: ID!): User!
+  getUserByEmail(email: String!): User!
 }
 
 input CreateUser {

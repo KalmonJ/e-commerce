@@ -2,7 +2,7 @@ import { Resolvers } from "@/generated/graphql";
 
 export const userResolver: Resolvers = {
   Query: {
-    getUser: async () => {
+    getUserById: async () => {
       return {
         email: "any_email",
         id: "anyid",
@@ -14,7 +14,7 @@ export const userResolver: Resolvers = {
   },
 
   Mutation: {
-    createUser: async () => {
+    createUser: async (_, __, ctx) => {
       return {
         email: "any_email",
         id: "anyid",

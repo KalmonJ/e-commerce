@@ -38,17 +38,17 @@ export type MutationCreateUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  getByEmail: User;
-  getUser: User;
+  getUserByEmail: User;
+  getUserById: User;
 };
 
 
-export type QueryGetByEmailArgs = {
+export type QueryGetUserByEmailArgs = {
   email: Scalars['String']['input'];
 };
 
 
-export type QueryGetUserArgs = {
+export type QueryGetUserByIdArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -158,8 +158,8 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
 };
 
 export type QueryResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  getByEmail?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryGetByEmailArgs, 'email'>>;
-  getUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryGetUserArgs, 'id'>>;
+  getUserByEmail?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryGetUserByEmailArgs, 'email'>>;
+  getUserById?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryGetUserByIdArgs, 'id'>>;
 };
 
 export type UserResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {

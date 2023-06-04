@@ -2,9 +2,9 @@ import { ApolloServer } from "@apollo/server";
 import { resolvers } from "./graphql/resolvers";
 import { typeDefs } from "./graphql/typeDefs";
 import { ServerContext } from "@/lib/context";
-import { createDBConnection } from "./db/connect";
 import { addMocksToSchema } from "@graphql-tools/mock";
 import { makeExecutableSchema } from "@graphql-tools/schema";
+import { createDBConnection } from "./db/connection";
 
 export const initializeServer = () => {
   let isServerStarted = false;
