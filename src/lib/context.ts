@@ -1,10 +1,12 @@
-import { BaseContext, ContextFunction } from "@apollo/server";
+import { ContextFunction } from "@apollo/server";
 import { Session, getServerSession } from "next-auth";
 import { NextRequest } from "next/server";
 import { authOptions } from "./auth";
+import { User } from "@/server/db/schemas/User";
 
-export interface ServerContext extends BaseContext {
+export interface ServerContext {
   session: Session | null;
+  user: typeof User;
   req: NextRequest;
 }
 
@@ -15,6 +17,7 @@ export const context: Contextfn = async (req) => {
 
   return {
     session: session,
+    user: User,
     req,
   };
 };

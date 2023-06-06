@@ -8,7 +8,7 @@ export default function Home() {
       <button
         onClick={() =>
           signIn("credentials", {
-            username: "hello world",
+            email: "dfsdfdfsdasdasdas",
             password: "password",
           })
         }

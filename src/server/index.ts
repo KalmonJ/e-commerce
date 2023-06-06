@@ -21,6 +21,7 @@ export const initializeServer = () => {
         introspection: process.env.NODE_ENV !== "production",
         schema: addMocksToSchema({
           schema: makeExecutableSchema({ typeDefs, resolvers }),
+          preserveResolvers: true,
         }) as any,
       });
       isServerStarted = true;
