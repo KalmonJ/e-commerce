@@ -9,6 +9,7 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/",
+    error: undefined,
   },
   providers: [
     CredentialsProvider({

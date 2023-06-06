@@ -7,6 +7,6 @@ export const createDBConnection = async () => {
     );
   } catch (error) {
     console.error(error);
-    return undefined;
+    return;
   }
 };
