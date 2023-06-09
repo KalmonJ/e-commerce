@@ -18,17 +18,6 @@ export const userResolver: Resolvers = {
         updatedAt: "sdfsdf",
       };
     },
-
-    getUserByEmail: async (_, { email }, ctx) => {
-      const user = await ctx.user.findOne<User>({ email });
-      if (!user)
-        throw new GraphQLError("User not found", {
-          extensions: {
-            code: "NOT_FOUND_ERROR",
-          },
-        });
-      return user;
-    },
   },
 
   Mutation: {

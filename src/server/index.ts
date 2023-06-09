@@ -1,10 +1,8 @@
-import { ApolloServer } from "@apollo/server";
+import { createDBConnection } from "./db/connection";
+import { createYoga, createSchema } from "graphql-yoga";
 import { resolvers } from "./graphql/resolvers";
 import { typeDefs } from "./graphql/typeDefs";
-import { ServerContext } from "@/lib/context";
-import { addMocksToSchema } from "@graphql-tools/mock";
-import { makeExecutableSchema } from "@graphql-tools/schema";
-import { createDBConnection } from "./db/connection";
+import { context } from "@/lib/context";
 
 export const initializeServer = () => {
   let isServerStarted = false;
@@ -15,20 +13,24 @@ export const initializeServer = () => {
     }
     try {
       createDBConnection();
-      const server = new ApolloServer<ServerContext>({
-        resolvers,
-        typeDefs,
-        introspection: process.env.NODE_ENV !== "production",
-        schema: addMocksToSchema({
-          schema: makeExecutableSchema({ typeDefs, resolvers }),
-          preserveResolvers: true,
-        }) as any,
+
+      const { handleRequest } = createYoga({
+        schema: createSchema({
+          resolvers: resolvers,
+          typeDefs: typeDefs,
+        }),
+        graphqlEndpoint: "/api/graphql",
+        fetchAPI: { Response },
+        cors: {
+          origin: ["http://localhost:3000"],
+        },
+        context: context,
       });
-      isServerStarted = true;
-      return server;
+
+      return handleRequest;
     } catch (error) {
       console.error(error);
-      return null;
+      return;
     }
   };
 

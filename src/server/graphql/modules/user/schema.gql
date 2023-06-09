@@ -23,7 +23,6 @@ type UserWithPassword {
 
 type Query {
   getUserById(id: ID!): User!
-  getUserByEmail(email: String!): UserWithPassword!
 }
 
 input CreateUser {

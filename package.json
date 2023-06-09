@@ -10,8 +10,6 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
-    "@apollo/server": "^4.7.1",
-    "@as-integrations/next": "^2.0.0",
     "@graphql-codegen/typescript-mongodb": "^2.4.6",
     "@graphql-tools/load-files": "^7.0.0",
     "@graphql-tools/merge": "^9.0.0",
@@ -20,18 +18,26 @@
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
     "bcrypt": "^5.1.0",
+    "class-variance-authority": "^0.6.0",
+    "clsx": "^1.2.1",
+    "cors": "^2.8.5",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
+    "graphql-yoga": "^4.0.0",
+    "lucide-react": "^0.241.0",
     "mongoose": "^7.2.2",
     "next": "13.4.4",
     "next-auth": "^4.22.1",
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.9.0",
     "server-only": "^0.0.1",
+    "tailwind-merge": "^1.13.1",
     "tailwindcss": "3.3.2",
+    "tailwindcss-animate": "^1.0.6",
     "typescript": "5.0.4",
     "zod": "^3.21.4"
   },
@@ -42,6 +48,7 @@
     "@graphql-codegen/typescript-resolvers": "4.0.0",
     "@graphql-tools/mock": "^9.0.0",
     "@graphql-tools/schema": "^10.0.0",
-    "@types/bcrypt": "^5.0.0"
+    "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.13"
   }
 }

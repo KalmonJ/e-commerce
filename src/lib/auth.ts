@@ -1,11 +1,24 @@
-import type { NextAuthOptions } from "next-auth";
+import { User } from "@/server/db/schemas/User";
+import { GraphQLError } from "graphql";
 import { compare } from "bcrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { getByEmail } from "@/server/graphql/querys";
+import type { CreateUser } from "@/generated/graphql";
+import type { NextAuthOptions } from "next-auth";
 
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
+  },
+  logger: {
+    error(code, metadata) {
+      console.error(code, metadata);
+    },
+    warn(code) {
+      console.warn(code);
+    },
+    debug(code, metadata) {
+      console.debug(code, metadata);
+    },
   },
   pages: {
     signIn: "/",
@@ -23,27 +36,27 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const response = await fetch(
-          `${process.env.NEXTAUTH_URL}/api/graphql`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              query: getByEmail,
-              variables: {
-                email: credentials?.email,
-              },
-            }),
-          }
+        const dbUser = await User.findOne<CreateUser & { _id: string }>({
+          email: credentials?.email,
+        });
+
+        if (!dbUser) {
+          throw new GraphQLError("Not found!");
+        }
+
+        const match = await compare(
+          credentials?.password as string,
+          dbUser.password
         );
 
-        const query = await response.json();
-        console.log(query.data.getUserByEmail, "from db");
+        if (!match) return null;
 
-        const user = { id: "1", name: "Admin", email: "admin@admin.com" };
-        return user;
+        return {
+          name: dbUser.name,
+          id: dbUser._id,
+          email: dbUser.email,
+          image: dbUser.image,
+        };
       },
     }),
   ],

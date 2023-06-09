@@ -1,25 +1,6 @@
-import { assertServer } from "@/lib/assert";
-import { ServerContext, context } from "@/lib/context";
 import { initializeServer } from "@/server";
-import { startServerAndCreateNextHandler } from "@as-integrations/next";
-import { NextRequest } from "next/server";
 
 const backendServer = initializeServer();
-const server = backendServer.start();
+const handler = backendServer.start();
 
-assertServer(server);
-
-const handler = startServerAndCreateNextHandler<NextRequest, ServerContext>(
-  server,
-  {
-    context,
-  }
-);
-
-export async function POST(request: NextRequest) {
-  return handler(request);
-}
-
-export async function GET(request: NextRequest) {
-  return handler(request);
-}
+export { handler as GET, handler as POST };
