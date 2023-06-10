@@ -1,20 +1,11 @@
-"use client";
-
+import { Header } from "@/components/header";
+import { Hero } from "@/components/hero";
 import { signIn } from "next-auth/react";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <button
-        onClick={() =>
-          signIn("credentials", {
-            email: "dfsdfdfsdasdasdas",
-            password: "password",
-          })
-        }
-      >
-        SIGN IN
-      </button>
+    <main>
+      <Hero />
     </main>
   );
 }
