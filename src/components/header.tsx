@@ -1,6 +1,7 @@
 import { Logo } from "./icons";
 import { ShoppingCart, User2 } from "lucide-react";
 import { Button } from "./ui/button";
+import { UserDialog } from "./user-dialog";
 
 const menuOptions = ["Home", "Headphones", "Speakers", "Earphones"];
 
@@ -23,9 +24,7 @@ export const Header = () => {
           <Button variant="link" size="sm">
             <ShoppingCart color="#ffffff" />
           </Button>
-          <Button variant="link" size="sm">
-            <User2 color="#ffffff" />
-          </Button>
+          <UserDialog />
         </div>
       </div>
       <hr className="w-full bg-[#FFFFFF] opacity-20" />
