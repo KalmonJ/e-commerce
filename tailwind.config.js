@@ -14,10 +14,14 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        Manrope: ["var(--Manrope)"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        orange: "hsl(var(--primary-orange))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {

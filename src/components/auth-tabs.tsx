@@ -1,3 +1,5 @@
+import { FormLogin } from "./forms/form-login";
+import { FormRegister } from "./forms/form-register";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./ui/tabs";
 
 export const AuthTabs = () => {
@@ -8,9 +10,11 @@ export const AuthTabs = () => {
         <TabsTrigger value="register">Register</TabsTrigger>
       </TabsList>
       <TabsContent value="login">
-        Make changes to your account here.
+        <FormLogin />
       </TabsContent>
-      <TabsContent value="register">Change your password here.</TabsContent>
+      <TabsContent value="register">
+        <FormRegister />
+      </TabsContent>
     </Tabs>
   );
 };

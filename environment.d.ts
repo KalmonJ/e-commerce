@@ -1,5 +1,3 @@
-import z from "zod";
-
 interface ENVS {
   NEXT_PUBLIC_MONGODB_URI: string;
 }
