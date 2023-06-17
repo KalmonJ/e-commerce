@@ -6,7 +6,7 @@ const UserSchema = new Schema<CreateUser>(
   {
     name: { type: String, required: true },
     username: { type: String, required: true },
-    phoneNumber: { type: String, required: true },
+    phoneNumber: { type: String },
     email: { type: String, required: true },
     password: { type: String, required: true },
     image: { type: String },
@@ -17,12 +17,5 @@ const UserSchema = new Schema<CreateUser>(
 );
 
 const User = models.User || model("User", UserSchema);
-
-UserSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    return next();
-  }
-  this["password"] = await hash(this.password, 10);
-});
 
 export { User };

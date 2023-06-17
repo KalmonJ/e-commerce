@@ -22,14 +22,13 @@ type UserWithPassword {
 }
 
 type Query {
-  getUserById(id: ID!): User!
+  user(id: ID!): User!
 }
 
 input CreateUser {
   username: String!
   name: String!
   email: String!
-  phoneNumber: String!
   password: String!
   image: String
 }

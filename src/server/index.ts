@@ -14,13 +14,15 @@ export const initializeServer = () => {
     try {
       createDBConnection();
 
+      console.log(process.env.NEXT_PUBLIC_MONGODB_URI, "envvv");
+
       const { handleRequest } = createYoga({
         schema: createSchema({
           resolvers: resolvers,
           typeDefs: typeDefs,
         }),
         graphqlEndpoint: "/api/graphql",
-        fetchAPI: { Response },
+        fetchAPI: { Request, Response },
         cors: {
           origin: ["http://localhost:3000"],
         },

@@ -3,28 +3,27 @@
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import z from "zod";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-
-const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string(),
-  username: z.string(),
-  name: z.string(),
-});
-
-type FormValues = z.infer<typeof formSchema>;
+import { CreateUser, createUserSchema } from "@/client/validations/create-user";
+import { audiophileAPI } from "@/client";
 
 export const FormRegister = () => {
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<CreateUser>({
+    resolver: zodResolver(createUserSchema),
   });
+
+  const onSubmit = async (values: CreateUser) => {
+    await audiophileAPI.user.create(values);
+  };
 
   return (
     <section className="flex flex-col">
       <Form {...form}>
-        <form className="flex flex-col pt-3 gap-4">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col pt-3 gap-4"
+        >
           <FormField
             name="email"
             control={form.control}

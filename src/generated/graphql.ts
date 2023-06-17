@@ -26,6 +26,18 @@ export type CreateUser = {
   username: Scalars['String']['input'];
 };
 
+export type Images = {
+  __typename?: 'Images';
+  presentation?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  thumbnail?: Maybe<Scalars['String']['output']>;
+};
+
+export type InTheBox = {
+  __typename?: 'InTheBox';
+  name: Scalars['String']['output'];
+  quantity: Scalars['Int']['output'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createUser: User;
@@ -36,19 +48,30 @@ export type MutationCreateUserArgs = {
   user: CreateUser;
 };
 
+export type Product = {
+  __typename?: 'Product';
+  _id: Scalars['ID']['output'];
+  description: Scalars['String']['output'];
+  features: Scalars['String']['output'];
+  images?: Maybe<Images>;
+  inTheBox: Array<InTheBox>;
+  name: Scalars['String']['output'];
+  price: Scalars['Float']['output'];
+};
+
 export type Query = {
   __typename?: 'Query';
-  getUserByEmail: User;
-  getUserById: User;
+  product?: Maybe<Product>;
+  user: User;
 };
 
 
-export type QueryGetUserByEmailArgs = {
-  email: Scalars['String']['input'];
+export type QueryProductArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
-export type QueryGetUserByIdArgs = {
+export type QueryUserArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -59,6 +82,19 @@ export type User = {
   email: Scalars['String']['output'];
   image?: Maybe<Scalars['String']['output']>;
   name: Scalars['String']['output'];
+  phoneNumber: Scalars['String']['output'];
+  updatedAt: Scalars['String']['output'];
+  username: Scalars['String']['output'];
+};
+
+export type UserWithPassword = {
+  __typename?: 'UserWithPassword';
+  _id: Scalars['String']['output'];
+  createdAt: Scalars['String']['output'];
+  email: Scalars['String']['output'];
+  image?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+  password: Scalars['String']['output'];
   phoneNumber: Scalars['String']['output'];
   updatedAt: Scalars['String']['output'];
   username: Scalars['String']['output'];
@@ -137,31 +173,66 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   CreateUser: CreateUser;
+  Float: ResolverTypeWrapper<Scalars['Float']['output']>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
+  Images: ResolverTypeWrapper<Images>;
+  InTheBox: ResolverTypeWrapper<InTheBox>;
+  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Mutation: ResolverTypeWrapper<{}>;
+  Product: ResolverTypeWrapper<Product>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   User: ResolverTypeWrapper<User>;
+  UserWithPassword: ResolverTypeWrapper<UserWithPassword>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
   CreateUser: CreateUser;
+  Float: Scalars['Float']['output'];
   ID: Scalars['ID']['output'];
+  Images: Images;
+  InTheBox: InTheBox;
+  Int: Scalars['Int']['output'];
   Mutation: {};
+  Product: Product;
   Query: {};
   String: Scalars['String']['output'];
   User: User;
+  UserWithPassword: UserWithPassword;
+};
+
+export type ImagesResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Images'] = ResolversParentTypes['Images']> = {
+  presentation?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  thumbnail?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type InTheBoxResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['InTheBox'] = ResolversParentTypes['InTheBox']> = {
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type MutationResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   createUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'user'>>;
 };
 
+export type ProductResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
+  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  features?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  images?: Resolver<Maybe<ResolversTypes['Images']>, ParentType, ContextType>;
+  inTheBox?: Resolver<Array<ResolversTypes['InTheBox']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  getUserByEmail?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryGetUserByEmailArgs, 'email'>>;
-  getUserById?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryGetUserByIdArgs, 'id'>>;
+  product?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
 };
 
 export type UserResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
@@ -176,9 +247,26 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type UserWithPasswordResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['UserWithPassword'] = ResolversParentTypes['UserWithPassword']> = {
+  _id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  phoneNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = ServerContext> = {
+  Images?: ImagesResolvers<ContextType>;
+  InTheBox?: InTheBoxResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
+  Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
+  UserWithPassword?: UserWithPasswordResolvers<ContextType>;
 };
 

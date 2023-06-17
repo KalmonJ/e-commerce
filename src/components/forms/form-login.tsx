@@ -10,6 +10,7 @@ import {
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
 import { FormField } from "../ui/form";
 import z from "zod";
 import { Input } from "../ui/input";
@@ -20,6 +21,8 @@ const formSchema = z.object({
   password: z.string(),
 });
 
+type FormValues = z.infer<typeof formSchema>;
+
 export const FormLogin = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -29,12 +32,18 @@ export const FormLogin = () => {
     },
   });
 
+  const onSubmit = (values: FormValues) => {
+    signIn("credentials", {
+      redirect: true,
+      email: values.email,
+      password: values.password,
+    });
+  };
+
   return (
     <Form {...form}>
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
+        onSubmit={form.handleSubmit(onSubmit)}
         className="flex pt-3 flex-col gap-6"
       >
         <FormField

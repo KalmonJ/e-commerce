@@ -1,31 +1,16 @@
 import { User } from "@/server/db/schemas/User";
-import { GraphQLError } from "graphql";
 import { compare } from "bcrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import type { CreateUser } from "@/generated/graphql";
 import type { NextAuthOptions } from "next-auth";
 
 export const authOptions: NextAuthOptions = {
-  session: {
-    strategy: "jwt",
-  },
-  logger: {
-    error(code, metadata) {
-      console.error(code, metadata);
-    },
-    warn(code) {
-      console.warn(code);
-    },
-    debug(code, metadata) {
-      console.debug(code, metadata);
-    },
-  },
   pages: {
     signIn: "/",
-    error: undefined,
   },
   providers: [
     CredentialsProvider({
+      id: "credentials",
       name: "Sign in",
       credentials: {
         email: {
@@ -41,7 +26,7 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (!dbUser) {
-          throw new GraphQLError("Not found!");
+          throw new Error("Not found!");
         }
 
         const match = await compare(
