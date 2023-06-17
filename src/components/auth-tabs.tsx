@@ -7,7 +7,7 @@ export const AuthTabs = () => {
     <Tabs defaultValue="login" className="w-auto">
       <TabsList>
         <TabsTrigger value="login">Login</TabsTrigger>
-        <TabsTrigger value="register">Register</TabsTrigger>
+        <TabsTrigger value="register ">Register</TabsTrigger>
       </TabsList>
       <TabsContent value="login">
         <FormLogin />
