@@ -14,8 +14,6 @@ export const initializeServer = () => {
     try {
       createDBConnection();
 
-      console.log(process.env.NEXT_PUBLIC_MONGODB_URI, "envvv");
-
       const { handleRequest } = createYoga({
         schema: createSchema({
           resolvers: resolvers,
@@ -28,6 +26,7 @@ export const initializeServer = () => {
             "http://localhost:3000",
             "https://e-commerce-xi-sand.vercel.app/",
           ],
+          methods: ["POST", "GET"],
         },
         context: context,
       });
