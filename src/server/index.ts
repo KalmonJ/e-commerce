@@ -24,7 +24,10 @@ export const initializeServer = () => {
         graphqlEndpoint: "/api/graphql",
         fetchAPI: { Request, Response },
         cors: {
-          origin: ["http://localhost:3000"],
+          origin: [
+            "http://localhost:3000",
+            "https://e-commerce-xi-sand.vercel.app/",
+          ],
         },
         context: context,
       });
