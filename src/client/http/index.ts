@@ -12,6 +12,10 @@ export const GraphQLRequest = (graphqlEndpoint: string) => {
       options?: GraphQLRequestInit
     ): Promise<TRes> {
       const response = await fetch(graphqlEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(data),
         ...options,
       });

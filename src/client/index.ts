@@ -1,7 +1,13 @@
 import { GraphQLRequest } from "./http";
 import type { CreateUser } from "./validations/create-user";
 
-const http = GraphQLRequest("/api/graphql");
+const http = GraphQLRequest(
+  `${
+    process.env.NODE_ENV !== "production"
+      ? "/api/graphql"
+      : `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/graphql`
+  }`
+);
 
 type CreateUserResponse = {
   createUser: {

@@ -19,6 +19,7 @@ export const initializeServer = () => {
           resolvers: resolvers,
           typeDefs: typeDefs,
         }),
+        
         graphqlEndpoint: "/api/graphql",
         fetchAPI: { Response },
         cors: false,
