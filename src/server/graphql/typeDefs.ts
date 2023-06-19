@@ -1,9 +1,13 @@
 import path from "path";
-import { loadFilesSync } from "@graphql-tools/load-files";
-import { mergeTypeDefs } from "@graphql-tools/merge";
+import { loadSchemaSync } from "@graphql-tools/load";
+import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 
-const typesArray = loadFilesSync(
-  path.join(__dirname, "../../../../../src/server/graphql/modules/**/*.gql")
+export const typeDefs = loadSchemaSync(
+  path.join(
+    __dirname,
+    "../../../../../src/server/graphql/modules/**/*.graphql"
+  ),
+  {
+    loaders: [new GraphQLFileLoader()],
+  }
 );
-
-export const typeDefs = mergeTypeDefs(typesArray);
