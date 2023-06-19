@@ -4,17 +4,18 @@ import { resolvers } from "@/server/graphql/resolvers";
 import { typeDefs } from "@/server/graphql/typeDefs";
 import { createYoga, createSchema } from "graphql-yoga";
 
+console.log(resolvers, typeDefs);
+
 createDBConnection();
 
 const { handleRequest } = createYoga({
   schema: createSchema({
-    resolvers: resolvers,
-    typeDefs: typeDefs,
+    resolvers,
+    typeDefs,
   }),
 
   graphqlEndpoint: "/api/graphql",
   fetchAPI: { Request, Response },
-  cors: false,
   context: context,
 });
 
