@@ -7,7 +7,7 @@ const typeDefs = loadSchemaSync(
   path.join(
     __dirname,
     process.env.NODE_ENV !== "development"
-      ? "../../../../../src/server/graphql/modules/**/*.graphql"
+      ? "../../../../src/server/graphql/modules/**/*.graphql"
       : "../../../../../src/server/graphql/modules/**/*.graphql"
   ),
   {
