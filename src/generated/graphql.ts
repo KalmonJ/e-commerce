@@ -22,14 +22,13 @@ export type CreateUser = {
   image?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
   password: Scalars['String']['input'];
-  phoneNumber: Scalars['String']['input'];
   username: Scalars['String']['input'];
 };
 
 export type Images = {
   __typename?: 'Images';
-  presentation?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  thumbnail?: Maybe<Scalars['String']['output']>;
+  presentation: Array<Scalars['String']['output']>;
+  thumbnail: Scalars['String']['output'];
 };
 
 export type InTheBox = {
@@ -204,8 +203,8 @@ export type ResolversParentTypes = {
 };
 
 export type ImagesResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Images'] = ResolversParentTypes['Images']> = {
-  presentation?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
-  thumbnail?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  presentation?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  thumbnail?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
