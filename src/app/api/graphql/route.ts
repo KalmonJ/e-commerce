@@ -14,7 +14,7 @@ const { handleRequest } = createYoga({
     resolvers,
     typeDefs,
   }),
-
+  cors: false,
   graphqlEndpoint: "/api/graphql",
   fetchAPI: { Request, Response },
   context: context,
