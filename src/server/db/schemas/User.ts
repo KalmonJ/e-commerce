@@ -6,7 +6,6 @@ const UserSchema = new Schema<CreateUser>(
   {
     name: { type: String, required: true },
     username: { type: String, required: true },
-    phoneNumber: { type: String },
     email: { type: String, required: true },
     password: { type: String, required: true },
     image: { type: String },
