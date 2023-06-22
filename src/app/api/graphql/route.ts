@@ -1,7 +1,7 @@
 import { context } from "@/lib/context";
 import { createDBConnection } from "@/server/db/connection";
 import { resolvers } from "@/server/graphql/resolvers";
-import typeDefs from "@/server/graphql/typeDefs";
+import { typeDefs } from "@/server/graphql/typeDefs";
 import { createYoga, createSchema } from "graphql-yoga";
 
 console.log(resolvers, typeDefs);
