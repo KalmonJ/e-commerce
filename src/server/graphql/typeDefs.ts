@@ -1,8 +1,9 @@
 import path from "path";
 import { loadSchemaSync } from "@graphql-tools/load";
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
+import { mergeTypeDefs } from "@graphql-tools/merge";
 
-export const typeDefs = loadSchemaSync(
+const typeDefs = loadSchemaSync(
   path.join(
     __dirname,
     process.env.NODE_ENV !== "development"
@@ -13,3 +14,5 @@ export const typeDefs = loadSchemaSync(
     loaders: [new GraphQLFileLoader()],
   }
 );
+
+export default mergeTypeDefs(typeDefs);
