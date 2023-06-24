@@ -4,9 +4,6 @@ import { resolvers } from "@/server/graphql/resolvers";
 import { typeDefs } from "@/server/graphql/typeDefs";
 import { createYoga, createSchema } from "graphql-yoga";
 
-console.log(resolvers, typeDefs);
-console.log(__dirname, "dirname");
-
 createDBConnection();
 
 const { handleRequest } = createYoga({

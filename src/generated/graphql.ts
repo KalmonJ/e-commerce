@@ -60,7 +60,8 @@ export type Product = {
 
 export type Query = {
   __typename?: 'Query';
-  product?: Maybe<Product>;
+  featuredProduct: Product;
+  product: Product;
   user: User;
 };
 
@@ -230,7 +231,8 @@ export type ProductResolvers<ContextType = ServerContext, ParentType extends Res
 };
 
 export type QueryResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  product?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
+  featuredProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType>;
+  product?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
 };
 

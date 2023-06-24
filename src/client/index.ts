@@ -2,39 +2,34 @@ import { GraphQLRequest } from "./http";
 import type { Product, User } from "@/generated/graphql";
 import type { CreateUser } from "./validations/create-user";
 
-const http = GraphQLRequest(
-  `${
-    process.env.NODE_ENV === "production"
-      ? `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/graphql`
-      : process.env.NODE_ENV === "test"
-      ? `${process.env.NEXT_PUBLIC_TEST_VERCEL_URL}/api/graphql`
-      : `${process.env.NEXT_PUBLIC_QA_VERCEL_URL}/api/graphql`
-  }`
-);
+const environments = {
+  development: "http://localhost:3000/api/graphql",
+  test: `${process.env.NEXT_PUBLIC_TEST_VERCEL_URL}/api/graphql`,
+  production: `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/graphql`,
+};
+
+const http = GraphQLRequest(environments[process.env.NODE_ENV]);
 
 type CreateUserResponse = {
   createUser: Pick<User, "_id">;
 };
 
 type FeaturedProductResponse = {
-  product: Pick<Product, "_id" | "name" | "description">;
+  featuredProduct: Pick<Product, "_id" | "name" | "description">;
 };
 
 const product = {
-  async get(id: string) {
+  async featuredProduct() {
     const responseProduct = await http.Query<FeaturedProductResponse>({
       query: /* GraphQL */ `
-        query product($id: ID!) {
-          product(id: $id) {
+        query product {
+          featuredProduct {
             _id
             name
             description
           }
         }
       `,
-      variables: {
-        id,
-      },
     });
 
     return responseProduct;

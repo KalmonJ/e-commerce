@@ -9,7 +9,9 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 
 export const Hero = async () => {
-  const feature = await audiophileAPI.product.get("6434980de26102064afc5763");
+  const feature = await audiophileAPI.product.featuredProduct();
+
+  console.log(feature, "featureeee");
 
   return (
     <section className="bg-featured bg-no-repeat bg-[#141414] bg-cover flex flex-col items-center w-full h-screen">
@@ -23,12 +25,12 @@ export const Hero = async () => {
             new product
           </ProductDescrition>
           <ProductName className="text-[56px] leading-[58px]">
-            {feature.product.name}
+            {feature.featuredProduct.name}
           </ProductName>
           <ProductDescrition className="text-base">
-            {feature.product.description}
+            {feature.featuredProduct.description}
           </ProductDescrition>
-          <Link href={`/products/${feature.product._id}`}>
+          <Link href={`/products/${feature.featuredProduct._id}`}>
             <Button variant="default" className="w-40" size="sm">
               See Product
             </Button>

@@ -7,9 +7,16 @@ export const productResolver: Resolvers = {
       const product = await ctx.product.findOne<Product>({
         _id: input.id,
       });
-
       if (!product) throw new GraphQLError("Product not found!");
+      return product;
+    },
 
+    featuredProduct: async (_, __, ctx) => {
+      const featuredProductId = "6434980de26102064afc5763";
+      const product = await ctx.product.findOne<Product>({
+        _id: featuredProductId,
+      });
+      if (!product) throw new GraphQLError("Featured product not found!");
       return product;
     },
   },
