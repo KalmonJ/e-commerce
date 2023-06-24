@@ -11,8 +11,6 @@ import Link from "next/link";
 export const Hero = async () => {
   const feature = await audiophileAPI.product.featuredProduct();
 
-  console.log(feature, "featureeee");
-
   return (
     <section className="bg-featured bg-no-repeat bg-[#141414] bg-cover flex flex-col items-center w-full h-screen">
       <div className="max-w-[1280px] w-full">
