@@ -25,12 +25,12 @@ export const Hero = async () => {
             new product
           </ProductDescrition>
           <ProductName className="text-[56px] leading-[58px]">
-            {feature.featuredProduct.name}
+            {feature?.featuredProduct?.name}
           </ProductName>
           <ProductDescrition className="text-base">
-            {feature.featuredProduct.description}
+            {feature?.featuredProduct?.description}
           </ProductDescrition>
-          <Link href={`/products/${feature.featuredProduct._id}`}>
+          <Link href={`/products/${feature?.featuredProduct?._id}`}>
             <Button variant="default" className="w-40" size="sm">
               See Product
             </Button>
