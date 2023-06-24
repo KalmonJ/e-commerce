@@ -25,7 +25,6 @@ export const GraphQLRequest = (graphqlEndpoint: string) => {
         return serverResponse.data as TRes;
       } catch (err: any) {
         console.log(err);
-
         throw new Error(err.message);
       }
     },
