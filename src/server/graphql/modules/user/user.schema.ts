@@ -1,5 +1,3 @@
-import { GraphQLSchema } from "graphql";
-
 export const userSchema = /* GraphQL */ `
   type User {
     _id: String!

@@ -17,6 +17,9 @@ module.exports = {
       fontFamily: {
         Manrope: ["var(--Manrope)"],
       },
+      backgroundImage: {
+        featured: "url(/image-hero.jpg)",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

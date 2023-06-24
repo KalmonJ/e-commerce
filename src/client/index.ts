@@ -1,3 +1,4 @@
+import { Product } from "@/generated/graphql";
 import { GraphQLRequest } from "./http";
 import type { CreateUser } from "./validations/create-user";
 
@@ -15,14 +16,39 @@ type CreateUserResponse = {
   };
 };
 
+type FeaturedProductResponse = Pick<Product, "_id" | "name" | "description">;
+
+const product = {
+  async get(id: string) {
+    const responseProduct = await http.Query<FeaturedProductResponse>({
+      query: /* GraphQL */ `
+        query product($id: ID!) {
+          product(id: $id) {
+            _id
+            name
+            description
+          }
+        }
+      `,
+      variables: {
+        id,
+      },
+    });
+
+    return responseProduct;
+  },
+};
+
 const user = {
   async create(input: CreateUser) {
     const user = await http.Mutation<CreateUserResponse>({
-      query: `mutation create($user:CreateUser!) {
-        createUser(user:$user) {
-          _id
+      query: /* GraphQL */ `
+        mutation create($user: CreateUser!) {
+          createUser(user: $user) {
+            _id
+          }
         }
-      }`,
+      `,
       variables: {
         user: input,
       },
@@ -35,6 +61,7 @@ const user = {
 export const app = () => {
   return {
     user,
+    product,
   };
 };
 
