@@ -4,9 +4,11 @@ import type { CreateUser } from "./validations/create-user";
 
 const http = GraphQLRequest(
   `${
-    process.env.NODE_ENV !== "production"
-      ? "http://localhost:3000/api/graphql"
-      : `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/graphql`
+    process.env.NODE_ENV === "production"
+      ? `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/graphql`
+      : process.env.NODE_ENV === "test"
+      ? `${process.env.NEXT_PUBLIC_TEST_VERCEL_URL}/api/graphql`
+      : `${process.env.NEXT_PUBLIC_QA_VERCEL_URL}/api/graphql`
   }`
 );
 
