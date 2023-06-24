@@ -1,22 +1,22 @@
-import { Product } from "@/generated/graphql";
 import { GraphQLRequest } from "./http";
+import type { Product, User } from "@/generated/graphql";
 import type { CreateUser } from "./validations/create-user";
 
 const http = GraphQLRequest(
   `${
     process.env.NODE_ENV !== "production"
-      ? "/api/graphql"
+      ? "http://localhost:3000/api/graphql"
       : `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/graphql`
   }`
 );
 
 type CreateUserResponse = {
-  createUser: {
-    _id: string;
-  };
+  createUser: Pick<User, "_id">;
 };
 
-type FeaturedProductResponse = Pick<Product, "_id" | "name" | "description">;
+type FeaturedProductResponse = {
+  product: Pick<Product, "_id" | "name" | "description">;
+};
 
 const product = {
   async get(id: string) {

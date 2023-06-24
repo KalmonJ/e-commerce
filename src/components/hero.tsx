@@ -1,3 +1,4 @@
+import { audiophileAPI } from "@/client";
 import { Header } from "./header";
 import {
   CardProduct,
@@ -5,8 +6,11 @@ import {
   ProductName,
 } from "./products/CardProduct";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
-export const Hero = () => {
+export const Hero = async () => {
+  const feature = await audiophileAPI.product.get("6434980de26102064afc5763");
+
   return (
     <section className="bg-featured bg-no-repeat bg-[#141414] bg-cover flex flex-col items-center w-full h-screen">
       <div className="max-w-[1280px] w-full">
@@ -19,15 +23,16 @@ export const Hero = () => {
             new product
           </ProductDescrition>
           <ProductName className="text-[56px] leading-[58px]">
-            XX99 Mark II Headphones
+            {feature.product.name}
           </ProductName>
           <ProductDescrition className="text-base">
-            Experience natural, lifelike audio and exceptional build quality
-            made for the passionate music enthusiast.
+            {feature.product.description}
           </ProductDescrition>
-          <Button variant="default" className="w-40" size="sm">
-            See Product
-          </Button>
+          <Link href={`/products/${feature.product._id}`}>
+            <Button variant="default" className="w-40" size="sm">
+              See Product
+            </Button>
+          </Link>
         </CardProduct>
       </section>
     </section>
