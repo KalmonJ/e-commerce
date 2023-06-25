@@ -9,26 +9,9 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 
 export const Hero = async () => {
-  const response = await fetch(environments[process.env.NODE_ENV], {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+  const feature = await audiophileAPI.product.featuredProduct();
 
-    body: JSON.stringify({
-      query: /* GraphQL */ `
-        query feature {
-          featuredProduct {
-            name
-            _id
-            description
-          }
-        }
-      `,
-    }),
-  });
-
-  const feature = await response.json();
+  console.log(feature, "featureee");
 
   return (
     <section className="bg-featured bg-no-repeat bg-[#141414] bg-cover flex flex-col items-center w-full h-screen">
