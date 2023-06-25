@@ -1,4 +1,4 @@
-import { audiophileAPI } from "@/client";
+import { audiophileAPI, environments } from "@/client";
 import { Header } from "./header";
 import {
   CardProduct,
@@ -9,7 +9,26 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 
 export const Hero = async () => {
-  const feature = await audiophileAPI.product.featuredProduct();
+  const response = await fetch(environments[process.env.NODE_ENV], {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify({
+      query: /* GraphQL */ `
+        query feature {
+          featuredProduct {
+            name
+            _id
+            description
+          }
+        }
+      `,
+    }),
+  });
+
+  const feature = await response.json();
 
   return (
     <section className="bg-featured bg-no-repeat bg-[#141414] bg-cover flex flex-col items-center w-full h-screen">

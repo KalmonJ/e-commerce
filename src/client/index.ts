@@ -2,7 +2,7 @@ import { GraphQLRequest } from "./http";
 import type { Product, User } from "@/generated/graphql";
 import type { CreateUser } from "./validations/create-user";
 
-const environments = {
+export const environments = {
   development: `http://localhost:3000/api/graphql`,
   test: `${process.env.NEXT_PUBLIC_TEST_VERCEL_URL}/api/graphql`,
   production: `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/graphql`,
