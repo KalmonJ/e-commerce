@@ -12,9 +12,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { FormField } from "../ui/form";
+
 import z from "zod";
+
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -24,6 +27,8 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export const FormLogin = () => {
+  const { replace } = useRouter();
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -34,9 +39,12 @@ export const FormLogin = () => {
 
   const onSubmit = (values: FormValues) => {
     signIn("credentials", {
-      redirect: true,
-      email: values.email,
-      password: values.password,
+      redirect: false,
+      ...values,
+    }).then((res) => {
+      if (!res?.error) {
+        replace("/");
+      }
     });
   };
 

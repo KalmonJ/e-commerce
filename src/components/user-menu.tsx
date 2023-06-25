@@ -19,9 +19,11 @@ export const UserMenu = async (props: UserMenuProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar>
+        <Avatar className="w-8 h-8">
           <AvatarImage src={props.user?.image ?? ""} />
-          <AvatarFallback>{props.user?.name?.slice(0, 2)}</AvatarFallback>
+          <AvatarFallback className="font-Manrope font-extrabold text-base">
+            {props.user?.name?.slice(0, 1)}
+          </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>

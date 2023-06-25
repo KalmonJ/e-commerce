@@ -30,7 +30,6 @@ export const Header = async () => {
             <ShoppingCart color="#ffffff" />
           </Button>
           {!session?.user && <UserDialog />}
-          {/* @ts-expect-error */}
           {session && session.user && <UserMenu user={session.user} />}
         </div>
       </div>
