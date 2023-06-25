@@ -1,5 +1,5 @@
 import { GraphQLRequest } from "./http";
-import type { Product, User } from "@/generated/graphql";
+import type { Category, Product, User } from "@/generated/graphql";
 import type { CreateUser } from "./validations/create-user";
 
 export const environments = {
@@ -18,6 +18,28 @@ type FeaturedProductResponse = {
   featuredProduct: Pick<Product, "_id" | "name" | "description">;
 };
 
+type CategoriesResponse = {
+  categories: Category[];
+};
+
+const category = {
+  async all() {
+    const categories = await http.Query<CategoriesResponse>({
+      query: /* GraphQL */ `
+        query category {
+          categories {
+            _id
+            name
+            image
+          }
+        }
+      `,
+    });
+
+    return categories;
+  },
+};
+
 const product = {
   async featuredProduct() {
     const responseProduct = await http.Query<FeaturedProductResponse>({
@@ -34,6 +56,8 @@ const product = {
 
     return responseProduct;
   },
+
+  category,
 };
 
 const user = {
