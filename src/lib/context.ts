@@ -1,14 +1,14 @@
-import { Session, getServerSession } from "next-auth";
-import { NextRequest } from "next/server";
+import { type Session, getServerSession } from "next-auth";
 import { authOptions } from "./auth";
 import { User } from "@/server/db/schemas/User";
 import { Product } from "@/server/db/schemas/Product";
+import { Category } from "@/server/db/schemas/Category";
 
 export interface ServerContext {
   session: Session | null;
   user: typeof User;
   product: typeof Product;
-  req: NextRequest;
+  category: typeof Category;
 }
 
 export const context = async () => {
@@ -18,5 +18,6 @@ export const context = async () => {
     session: session,
     user: User,
     product: Product,
+    category: Category,
   };
 };

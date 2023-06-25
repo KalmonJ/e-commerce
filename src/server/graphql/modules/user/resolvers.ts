@@ -1,6 +1,6 @@
-import { CreateUser, Resolvers, User } from "@/generated/graphql";
+import type { CreateUser, Resolvers, User } from "@/generated/graphql";
+import type { HydratedDocument } from "mongoose";
 import { GraphQLError } from "graphql";
-import { HydratedDocument } from "mongoose";
 import * as bcrypt from "bcrypt";
 
 export const userResolver: Resolvers = {

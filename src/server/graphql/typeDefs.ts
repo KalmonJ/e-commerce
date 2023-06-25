@@ -6,6 +6,7 @@
 import { mergeTypeDefs } from "@graphql-tools/merge";
 import { productSchema } from "./modules/product/product.schema";
 import { userSchema } from "./modules/user/user.schema";
+import { categorySchema } from "./modules/category/category.schema";
 
 // console.log(
 //   path.join(
@@ -30,5 +31,5 @@ import { userSchema } from "./modules/user/user.schema";
 
 // export default mergeTypeDefs(typeDefs);
 
-const types = [userSchema, productSchema];
+const types = [userSchema, productSchema, categorySchema];
 export const typeDefs = mergeTypeDefs(types);

@@ -17,6 +17,19 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export enum Categories {
+  Earphones = 'EARPHONES',
+  Headphones = 'HEADPHONES',
+  Speakers = 'SPEAKERS'
+}
+
+export type Category = {
+  __typename?: 'Category';
+  _id: Scalars['ID']['output'];
+  image: Scalars['String']['output'];
+  name: Categories;
+};
+
 export type CreateUser = {
   email: Scalars['String']['input'];
   image?: InputMaybe<Scalars['String']['input']>;
@@ -60,6 +73,7 @@ export type Product = {
 
 export type Query = {
   __typename?: 'Query';
+  categories: Array<Category>;
   featuredProduct: Product;
   product: Product;
   user: User;
@@ -172,6 +186,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  Categories: Categories;
+  Category: ResolverTypeWrapper<Category>;
   CreateUser: CreateUser;
   Float: ResolverTypeWrapper<Scalars['Float']['output']>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
@@ -189,6 +205,7 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
+  Category: Category;
   CreateUser: CreateUser;
   Float: Scalars['Float']['output'];
   ID: Scalars['ID']['output'];
@@ -201,6 +218,13 @@ export type ResolversParentTypes = {
   String: Scalars['String']['output'];
   User: User;
   UserWithPassword: UserWithPassword;
+};
+
+export type CategoryResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Category'] = ResolversParentTypes['Category']> = {
+  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  image?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['Categories'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ImagesResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Images'] = ResolversParentTypes['Images']> = {
@@ -231,6 +255,7 @@ export type ProductResolvers<ContextType = ServerContext, ParentType extends Res
 };
 
 export type QueryResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  categories?: Resolver<Array<ResolversTypes['Category']>, ParentType, ContextType>;
   featuredProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType>;
   product?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
@@ -262,6 +287,7 @@ export type UserWithPasswordResolvers<ContextType = ServerContext, ParentType ex
 };
 
 export type Resolvers<ContextType = ServerContext> = {
+  Category?: CategoryResolvers<ContextType>;
   Images?: ImagesResolvers<ContextType>;
   InTheBox?: InTheBoxResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;

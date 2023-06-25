@@ -1,4 +1,4 @@
-import { audiophileAPI, environments } from "@/client";
+import { audiophileAPI } from "@/client";
 import { Header } from "./header";
 import {
   CardProduct,
@@ -10,8 +10,6 @@ import Link from "next/link";
 
 export const Hero = async () => {
   const feature = await audiophileAPI.product.featuredProduct();
-
-  console.log(feature, "featureee");
 
   return (
     <section className="bg-featured bg-no-repeat bg-[#141414] bg-cover flex flex-col items-center w-full h-screen">
