@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { Hero } from "@/components/hero";
 import { Categories } from "@/components/products/Categories";
 import { FeaturedSection } from "@/components/products/FeaturedSection";
