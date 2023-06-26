@@ -22,5 +22,6 @@ export const productSchema = /* GraphQL */ `
   type Query {
     product(id: ID!): Product!
     featuredProduct: Product!
+    featuredSectionProducts: [Product!]!
   }
 `;

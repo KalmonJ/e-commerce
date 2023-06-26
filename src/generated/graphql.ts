@@ -75,6 +75,7 @@ export type Query = {
   __typename?: 'Query';
   categories: Array<Category>;
   featuredProduct: Product;
+  featuredSectionProducts: Array<Product>;
   product: Product;
   user: User;
 };
@@ -257,6 +258,7 @@ export type ProductResolvers<ContextType = ServerContext, ParentType extends Res
 export type QueryResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   categories?: Resolver<Array<ResolversTypes['Category']>, ParentType, ContextType>;
   featuredProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType>;
+  featuredSectionProducts?: Resolver<Array<ResolversTypes['Product']>, ParentType, ContextType>;
   product?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
 };

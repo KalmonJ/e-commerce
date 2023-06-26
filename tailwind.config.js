@@ -19,6 +19,8 @@ module.exports = {
       },
       backgroundImage: {
         featured: "url(/image-hero.jpg)",
+        "featured-section": "url(/featured-section-bg.png)",
+        "featured-section-speaker": "url(/featured-section-speaker.jpg)",
       },
       colors: {
         border: "hsl(var(--border))",

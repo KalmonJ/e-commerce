@@ -1,7 +1,14 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -33,6 +40,7 @@ export const FormRegister = () => {
                 <FormControl>
                   <Input placeholder="email@example.com" {...field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -45,6 +53,7 @@ export const FormRegister = () => {
                 <FormControl>
                   <Input placeholder="Full name..." {...field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -57,6 +66,7 @@ export const FormRegister = () => {
                 <FormControl>
                   <Input placeholder="Display name" {...field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -69,6 +79,7 @@ export const FormRegister = () => {
                 <FormControl>
                   <Input type="password" placeholder="******" {...field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />

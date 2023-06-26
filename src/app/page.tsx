@@ -1,13 +1,13 @@
 import { Hero } from "@/components/hero";
 import { Categories } from "@/components/products/Categories";
+import { FeaturedSection } from "@/components/products/FeaturedSection";
 
 export default function Home() {
   return (
     <main className="flex flex-col gap-32 bg-white items-center">
       <Hero />
-      <section className="h-screen max-w-7xl w-full">
-        <Categories />
-      </section>
+      <Categories />
+      <FeaturedSection />
     </main>
   );
 }

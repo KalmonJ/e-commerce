@@ -18,6 +18,10 @@ type FeaturedProductResponse = {
   featuredProduct: Pick<Product, "_id" | "name" | "description">;
 };
 
+type FeaturedProductsResponse = {
+  featuredSectionProducts: Pick<Product, "_id" | "name" | "description">[];
+};
+
 type CategoriesResponse = {
   categories: Category[];
 };
@@ -48,6 +52,22 @@ const product = {
           featuredProduct {
             _id
             name
+            description
+          }
+        }
+      `,
+    });
+
+    return responseProduct;
+  },
+
+  async featuredProducts() {
+    const responseProduct = await http.Query<FeaturedProductsResponse>({
+      query: /* GraphQL */ `
+        query FeaturedProducts {
+          featuredSectionProducts {
+            name
+            _id
             description
           }
         }

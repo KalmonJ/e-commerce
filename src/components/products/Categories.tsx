@@ -7,7 +7,7 @@ export const Categories = async () => {
   const { categories } = await audiophileAPI.product.category.all();
 
   return (
-    <div className="flex gap-8">
+    <div className="flex gap-8 w-full justify-center">
       {categories.map((category) => (
         <div
           key={category._id}

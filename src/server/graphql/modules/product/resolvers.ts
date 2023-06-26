@@ -19,5 +19,19 @@ export const productResolver: Resolvers = {
       if (!product) throw new GraphQLError("Featured product not found!");
       return product;
     },
+
+    featuredSectionProducts: async (_, __, ctx) => {
+      const zx9Speaker = "64349684e26102064afc575c";
+      const zx7Speaker = "6434a0194b17ad2127f2358a";
+      const yx1Earphones = "6434a11d4b17ad2127f23591";
+
+      const productsSection = await ctx.product.find<Product>({
+        _id: {
+          $in: [zx9Speaker, zx7Speaker, yx1Earphones],
+        },
+      });
+
+      return productsSection;
+    },
   },
 };
