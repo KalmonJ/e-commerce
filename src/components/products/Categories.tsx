@@ -8,7 +8,7 @@ export const Categories = async () => {
 
   return (
     <div className="flex gap-8 w-full justify-center">
-      {data.categories.map((category) => (
+      {data?.categories.map((category) => (
         <div
           key={category._id}
           className="flex flex-col justify-end relative h-52 py-5 max-w-[350px] w-full bg-light-gray rounded-[8px]"
