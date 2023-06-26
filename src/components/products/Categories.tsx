@@ -4,11 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const Categories = async () => {
-  const { categories } = await audiophileAPI.product.category.all();
+  const data = await audiophileAPI.product.category.all();
 
   return (
     <div className="flex gap-8 w-full justify-center">
-      {categories.map((category) => (
+      {data.categories.map((category) => (
         <div
           key={category._id}
           className="flex flex-col justify-end relative h-52 py-5 max-w-[350px] w-full bg-light-gray rounded-[8px]"

@@ -6,15 +6,10 @@ import { audiophileAPI } from "@/client";
 import Link from "next/link";
 
 export const FeaturedSection = async () => {
-  const { featuredSectionProducts } =
-    await audiophileAPI.product.featuredProducts();
-  const products = featuredSectionProducts;
+  const data = await audiophileAPI.product.featuredProducts();
 
-  if (!products) {
-    return null;
-  }
-
-  const [product_1, product_2, product_3] = products;
+  const { featuredSectionProducts } = data;
+  const [product_1, product_2, product_3] = featuredSectionProducts;
 
   return (
     <section className="flex flex-col max-w-screen-xl w-full gap-8">
