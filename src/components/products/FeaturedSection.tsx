@@ -11,7 +11,7 @@ export const FeaturedSection = async () => {
   const featuredProducts = data;
   const products = featuredProducts;
 
-  const [product_1, product_2, product_3] = products.featuredSectionProducts;
+  const [product_1, product_2, product_3] = products?.featuredSectionProducts;
 
   return (
     <section className="flex flex-col max-w-screen-xl w-full gap-8">
