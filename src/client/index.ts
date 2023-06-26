@@ -26,6 +26,8 @@ type CategoriesResponse = {
   categories: Category[];
 };
 
+// TODO: add try catch statement
+
 const category = {
   async all() {
     const categories = await http.Query<CategoriesResponse>({
