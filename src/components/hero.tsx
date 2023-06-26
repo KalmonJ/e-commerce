@@ -14,6 +14,7 @@ export const Hero = async () => {
   return (
     <section className="bg-featured bg-no-repeat bg-[#141414] bg-cover flex flex-col items-center w-full h-screen">
       <div className="max-w-[1280px] w-full">
+        {/* @ts-ignore */}
         <Header />
       </div>
       <section className="max-w-7xl h-full flex items-center w-full">
