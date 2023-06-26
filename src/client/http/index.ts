@@ -11,22 +11,17 @@ export const GraphQLRequest = (graphqlEndpoint: string) => {
       data: GraphQLRequestData<TReq>,
       options?: GraphQLRequestInit
     ): Promise<TRes> {
-      try {
-        const response = await fetch(graphqlEndpoint, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-          ...options,
-        });
+      const response = await fetch(graphqlEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        ...options,
+      });
 
-        const serverResponse = await response.json();
-        return serverResponse.data as TRes;
-      } catch (err: any) {
-        console.log(err);
-        throw new Error(err.message);
-      }
+      const serverResponse = await response.json();
+      return serverResponse.data as TRes;
     },
 
     async Mutation<TRes = any, TReq = any>(
