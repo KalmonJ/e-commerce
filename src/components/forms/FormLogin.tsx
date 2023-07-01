@@ -11,22 +11,11 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormField } from "../ui/form";
-import { redirect } from "next/navigation";
-
-import z from "zod";
-
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { useRouter } from "next/navigation";
+import { Auth, authValidator } from "@/lib/validators/auth";
 
-const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string(),
-});
-
-type FormValues = z.infer<typeof formSchema>;
-
-const login = async (input: FormValues) => {
+const login = async (input: Auth) => {
   return fetch("/api/auth", {
     method: "POST",
     headers: {
@@ -37,17 +26,15 @@ const login = async (input: FormValues) => {
 };
 
 export const FormLogin = () => {
-  const { back } = useRouter();
-
   const form = useForm({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(authValidator),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = async (values: FormValues) =>
+  const onSubmit = async (values: Auth) =>
     login(values)
       .then(async (res) => {
         const result = await res.json();
