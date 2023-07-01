@@ -4,8 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+type Category = {
+  name: string;
+  id: number;
+  image: string;
+};
+
 export const Categories = async () => {
-  const categories = await db.category.findMany();
+  const categories: Category[] = await db.category.findMany();
 
   if (!categories) return notFound();
 
