@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
-import { Header } from "./Header";
+import { Header } from "@/components/Header";
 
 export const Hero = async () => {
   const featuredProduct = await db.product.findUnique({
