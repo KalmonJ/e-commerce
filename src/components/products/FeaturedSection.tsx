@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CardProduct, ProductDescrition, ProductName } from "./CardProduct";
 import { Button } from "../ui/button";
-import { AspectRatio } from "../ui/aspect-ration";
+import { AspectRatio } from "../ui/aspect-ratio";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";

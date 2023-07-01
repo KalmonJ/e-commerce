@@ -1,4 +1,3 @@
-import { Header } from "./header";
 import {
   CardProduct,
   ProductDescrition,
@@ -8,6 +7,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
+import { Header } from "./Header";
 
 export const Hero = async () => {
   const featuredProduct = await db.product.findUnique({

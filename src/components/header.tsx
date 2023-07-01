@@ -1,9 +1,9 @@
 import { Logo } from "./icons";
 import { ShoppingCart } from "lucide-react";
 import { Button } from "./ui/button";
-import { UserDialog } from "./dialogs/user-dialog";
+import { UserDialog } from "./dialogs/UserDialog";
 
-import { UserMenu } from "./user-menu";
+import { UserMenu } from "./UserMenu";
 import { getServerSession } from "@/lib/auth";
 
 const menuOptions = ["Home", "Headphones", "Speakers", "Earphones"];

@@ -12,17 +12,21 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { CreateUser, createUserSchema } from "@/client/validations/create-user";
-import { audiophileAPI } from "@/client";
+import { CreateUser, userValidator } from "@/lib/validators/user";
+
+const registerUser = async (input: CreateUser) => {
+  await fetch("/api/user/create", {
+    method: "POST",
+    body: JSON.stringify(input),
+  });
+};
 
 export const FormRegister = () => {
   const form = useForm<CreateUser>({
-    resolver: zodResolver(createUserSchema),
+    resolver: zodResolver(userValidator),
   });
 
-  const onSubmit = async (values: CreateUser) => {
-    await audiophileAPI.user.create(values);
-  };
+  const onSubmit = async (values: CreateUser) => registerUser(values);
 
   return (
     <section className="flex flex-col">

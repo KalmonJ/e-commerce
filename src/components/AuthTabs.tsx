@@ -1,5 +1,5 @@
-import { FormLogin } from "./forms/form-login";
-import { FormRegister } from "./forms/form-register";
+import { FormLogin } from "./forms/FormLogin";
+import { FormRegister } from "./forms/FormRegister";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./ui/tabs";
 
 export const AuthTabs = () => {

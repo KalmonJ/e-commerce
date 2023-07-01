@@ -1,6 +1,6 @@
-import { Hero } from "@/components/hero";
 import { Categories } from "@/components/products/Categories";
 import { FeaturedSection } from "@/components/products/FeaturedSection";
+import { Hero } from "./../components/Hero";
 
 export default function Home() {
   return (

@@ -1,4 +1,3 @@
-import { product } from "@/client";
 import { db } from "@/lib/db";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
