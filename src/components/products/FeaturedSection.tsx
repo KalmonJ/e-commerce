@@ -2,18 +2,22 @@ import Image from "next/image";
 import { CardProduct, ProductDescrition, ProductName } from "./CardProduct";
 import { Button } from "../ui/button";
 import { AspectRatio } from "../ui/aspect-ration";
-import { product } from "@/client";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { db } from "@/lib/db";
 
 export const FeaturedSection = async () => {
-  const data = await product.featuredProducts();
-  console.log(data, "dataaa")
+  const data = await db.product.findMany({
+    where: {
+      id: {
+        in: [1, 5, 6],
+      },
+    },
+  });
 
+  if (!data) return notFound();
 
-  if(!data) return notFound()
-
-  const [product_1, product_2, product_3] = data.featuredSectionProducts;
+  const [product_1, product_2, product_3] = data;
 
   return (
     <section className="flex flex-col max-w-screen-xl w-full gap-8">
@@ -37,7 +41,7 @@ export const FeaturedSection = async () => {
             <ProductDescrition className="text-[15px] leading-[25px]">
               {product_1.description}
             </ProductDescrition>
-            <Link href={`/product/${product_1._id}`}>
+            <Link href={`/product/${product_1.id}`}>
               <Button
                 variant="default"
                 size="sm"
@@ -54,7 +58,7 @@ export const FeaturedSection = async () => {
           {product_2.name}
         </h4>
         <div>
-          <Link href={`/product/${product_2._id}`}>
+          <Link href={`/product/${product_2.id}`}>
             <Button
               variant="outline"
               size="sm"
@@ -81,7 +85,7 @@ export const FeaturedSection = async () => {
             {product_3.name}
           </h4>
           <div>
-            <Link href={`/product/${product_3._id}`}>
+            <Link href={`/product/${product_3.id}`}>
               <Button
                 variant="outline"
                 size="sm"
