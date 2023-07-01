@@ -2,9 +2,12 @@ import { db } from "@/lib/db";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export const Categories = async () => {
   const categories = await db.category.findMany();
+
+  if (!categories) return notFound();
 
   return (
     <div className="flex gap-8 w-full justify-center">
