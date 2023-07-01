@@ -1,15 +1,15 @@
 import { Logo } from "./icons";
 import { ShoppingCart } from "lucide-react";
 import { Button } from "./ui/button";
-import { UserDialog } from "./user-dialog";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { UserDialog } from "./dialogs/user-dialog";
+
 import { UserMenu } from "./user-menu";
+import { getServerSession } from "@/lib/auth";
 
 const menuOptions = ["Home", "Headphones", "Speakers", "Earphones"];
 
 export const Header = async () => {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
 
   return (
     <header className="w-full flex flex-col items-center pt-8 ">
@@ -29,9 +29,9 @@ export const Header = async () => {
           <Button variant="link" size="sm">
             <ShoppingCart color="#ffffff" />
           </Button>
-          {!session?.user && <UserDialog />}
+          <UserDialog />
           {/* @ts-ignore */}
-          {session && session.user && <UserMenu user={session.user} />}
+          {session && session.id && <UserMenu user={{ ...session }} />}
         </div>
       </div>
       <hr className="w-full bg-[#FFFFFF] opacity-20" />

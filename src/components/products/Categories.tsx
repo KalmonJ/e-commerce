@@ -1,16 +1,17 @@
-import { audiophileAPI } from "@/client";
+import { product } from "@/client";
+import { db } from "@/lib/db";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export const Categories = async () => {
-  const data = await audiophileAPI.product.category.all();
+  const categories = await db.category.findMany();
 
   return (
     <div className="flex gap-8 w-full justify-center">
-      {data?.categories.map((category) => (
+      {categories.map((category) => (
         <div
-          key={category._id}
+          key={category.id}
           className="flex flex-col justify-end relative h-52 py-5 max-w-[350px] w-full bg-light-gray rounded-[8px]"
         >
           <Image

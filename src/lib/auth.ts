@@ -1,48 +1,51 @@
-import { User } from "@/server/db/schemas/User";
-import { compare } from "bcrypt";
-import CredentialsProvider from "next-auth/providers/credentials";
-import type { CreateUser } from "@/generated/graphql";
-import type { NextAuthOptions } from "next-auth";
+import { cookies } from "next/headers";
+import jwt from "jsonwebtoken";
+import { db } from "./db";
+import { User } from "@/types/user";
 
-export const authOptions: NextAuthOptions = {
-  pages: {
-    signIn: "/",
-  },
-  providers: [
-    CredentialsProvider({
-      id: "credentials",
-      name: "Sign in",
-      credentials: {
-        email: {
-          label: "Email",
-          type: "email",
-          placeholder: "example@example.com",
+let cachedUser: User | null = null;
+
+export const getServerSession = async () => {
+  const refreshToken = cookies().get("accessToken");
+
+  if (!refreshToken) {
+    return null;
+  }
+
+  try {
+    const payload = jwt.verify(refreshToken.value, process.env.JWT_SECRET);
+
+    if (isPayload(payload)) {
+      if (cachedUser) {
+        console.log("get user from cache");
+        return cachedUser;
+      }
+
+      const dbUser = await db.user.findUnique({
+        where: {
+          id: payload.userId,
         },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials) {
-        const dbUser = await User.findOne<CreateUser & { _id: string }>({
-          email: credentials?.email,
-        });
+        select: {
+          email: true,
+          id: true,
+          image: true,
+          username: true,
+          name: true,
+          session: true,
+        },
+      });
 
-        if (!dbUser) {
-          throw new Error("Not found!");
-        }
+      cachedUser = dbUser;
 
-        const match = await compare(
-          credentials?.password as string,
-          dbUser.password
-        );
-
-        if (!match) return null;
-
-        return {
-          name: dbUser.name,
-          id: dbUser._id,
-          email: dbUser.email,
-          image: dbUser.image,
-        };
-      },
-    }),
-  ],
+      return cachedUser;
+    }
+  } catch (error) {
+    return null;
+  }
 };
+
+function isPayload(
+  payload: string | jwt.JwtPayload | null
+): payload is { userId: number } {
+  return (payload as { userId: number }).userId !== undefined;
+}

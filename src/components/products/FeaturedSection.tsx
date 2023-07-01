@@ -2,16 +2,18 @@ import Image from "next/image";
 import { CardProduct, ProductDescrition, ProductName } from "./CardProduct";
 import { Button } from "../ui/button";
 import { AspectRatio } from "../ui/aspect-ration";
-import { audiophileAPI } from "@/client";
+import { product } from "@/client";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export const FeaturedSection = async () => {
-  const data = await audiophileAPI.product.featuredProducts();
+  const data = await product.featuredProducts();
+  console.log(data, "dataaa")
 
-  const featuredProducts = data;
-  const products = featuredProducts;
 
-  const [product_1, product_2, product_3] = products?.featuredSectionProducts;
+  if(!data) return notFound()
+
+  const [product_1, product_2, product_3] = data.featuredSectionProducts;
 
   return (
     <section className="flex flex-col max-w-screen-xl w-full gap-8">

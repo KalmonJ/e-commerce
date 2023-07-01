@@ -46,7 +46,7 @@ const category = {
   },
 };
 
-const product = {
+export const product = {
   async featuredProduct() {
     const responseProduct = await http.Query<FeaturedProductResponse>({
       query: /* GraphQL */ `
@@ -64,25 +64,34 @@ const product = {
   },
 
   async featuredProducts() {
-    const responseProduct = await http.Query<FeaturedProductsResponse>({
-      query: /* GraphQL */ `
-        query FeaturedProducts {
-          featuredSectionProducts {
-            name
-            _id
-            description
+    const response =  await fetch(environments[process.env.NODE_ENV], {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: /* GraphQL */`
+          query FeaturedProducts {
+            featuredSectionProducts {
+              name
+              _id
+              description
+            }
           }
-        }
-      `,
-    });
+        `
+      })
+    })
 
+    const responseProduct =  await response.json()
+    console.log(responseProduct, "AAAAAABBASD")
+ 
     return responseProduct;
   },
 
   category,
 };
 
-const user = {
+export const user = {
   async create(input: CreateUser) {
     const user = await http.Mutation<CreateUserResponse>({
       query: /* GraphQL */ `

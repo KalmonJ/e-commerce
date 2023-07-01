@@ -1,4 +1,3 @@
-import { audiophileAPI } from "@/client";
 import { Header } from "./header";
 import {
   CardProduct,
@@ -7,9 +6,17 @@ import {
 } from "./products/CardProduct";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { db } from "@/lib/db";
 
 export const Hero = async () => {
-  const feature = await audiophileAPI.product.featuredProduct();
+  const featuredProduct = await db.product.findUnique({
+    where: {
+      id: 2,
+    },
+  });
+
+  if (!featuredProduct) return notFound();
 
   return (
     <section className="bg-featured bg-no-repeat bg-[#141414] bg-cover flex flex-col items-center w-full h-screen">
@@ -23,12 +30,12 @@ export const Hero = async () => {
             new product
           </ProductDescrition>
           <ProductName className="text-[56px] leading-[58px]">
-            {feature?.featuredProduct?.name}
+            {featuredProduct.name}
           </ProductName>
           <ProductDescrition className="text-base">
-            {feature?.featuredProduct?.description}
+            {featuredProduct.description}
           </ProductDescrition>
-          <Link href={`/products/${feature?.featuredProduct?._id}`}>
+          <Link href={`/products/${featuredProduct.id}`}>
             <Button variant="default" className="w-40" size="sm">
               See Product
             </Button>

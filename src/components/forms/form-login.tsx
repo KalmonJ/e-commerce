@@ -10,8 +10,8 @@ import {
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
 import { FormField } from "../ui/form";
+import { redirect } from "next/navigation";
 
 import z from "zod";
 
@@ -26,8 +26,18 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
+const login = async (input: FormValues) => {
+  return fetch("/api/auth", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(input),
+  });
+};
+
 export const FormLogin = () => {
-  const { replace } = useRouter();
+  const { back } = useRouter();
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -37,16 +47,13 @@ export const FormLogin = () => {
     },
   });
 
-  const onSubmit = (values: FormValues) => {
-    signIn("credentials", {
-      redirect: false,
-      ...values,
-    }).then((res) => {
-      if (!res?.error) {
-        replace("/");
-      }
-    });
-  };
+  const onSubmit = async (values: FormValues) =>
+    login(values)
+      .then(async (res) => {
+        const result = await res.json();
+        if (!res.ok) throw new Error(result.message);
+      })
+      .catch((err) => console.log(err.message));
 
   return (
     <Form {...form}>
