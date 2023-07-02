@@ -53,7 +53,7 @@ export const FeaturedSection = async () => {
           </CardProduct>
         </div>
       </div>
-      <div className="w-full gap-8 h-[320px] flex flex-col justify-center pl-16 bg-featured-section-speaker bg-no-repeat bg-cover">
+      <div className="w-full gap-8 h-[320px] flex flex-col justify-center  pl-16 bg-featured-section-speaker bg-no-repeat bg-cover">
         <h4 className="font-Manrope text-[28px] font-bold tracking-[2px] uppercase">
           {product_2.name}
         </h4>
@@ -70,13 +70,16 @@ export const FeaturedSection = async () => {
         </div>
       </div>
       <div className="flex gap-[30px]">
-        <div className="w-full rounded-md ">
-          <AspectRatio ratio={16 / 9} className="h-[320px]">
+        <div className="w-full overflow-hidden rounded ">
+          <AspectRatio
+            ratio={16 / 9}
+            className="h-[320px] overflow-hidden rounded"
+          >
             <Image
               fill
               src="https://res.cloudinary.com/dz3ucqpmn/image/upload/v1687744710/products/product-yx1-earphones/image-earphones-yx1_tftk5v.jpg"
               alt={product_3.name}
-              className="rounded-md"
+              className="object-cover transition-all hover:scale-105"
             />
           </AspectRatio>
         </div>
