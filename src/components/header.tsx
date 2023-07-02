@@ -13,7 +13,7 @@ export const Header = async () => {
 
   return (
     <header className="w-full flex flex-col items-center pt-8 ">
-      <div className="w-full flex pb-8 justify-between items-center">
+      <div className="w-full max-w-7xl flex pb-8 justify-between items-center">
         <Logo />
         <ul className="flex gap-[34px]">
           {menuOptions.map((option) => (

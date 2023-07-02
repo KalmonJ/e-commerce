@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-type Category = {
+export type Category = {
   name: string;
   id: number;
   image: string;
@@ -35,7 +35,7 @@ export const Categories = async () => {
             </h4>
             <div className="flex cursor-pointer items-center gap-2">
               <Link
-                href={`/category/${category.name}`}
+                href={`/categories/${category.name.toLowerCase()}`}
                 className="uppercase font-Manrope font-bold tracking-[1px] text-[13px] opacity-50"
               >
                 Shop

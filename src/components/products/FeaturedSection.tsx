@@ -1,5 +1,10 @@
 import Image from "next/image";
-import { CardProduct, ProductDescrition, ProductName } from "./CardProduct";
+import {
+  CardProduct,
+  ProductDescription,
+  ProductInfo,
+  ProductName,
+} from "./CardProduct";
 import { Button } from "../ui/button";
 import { AspectRatio } from "../ui/aspect-ratio";
 import Link from "next/link";
@@ -34,22 +39,24 @@ export const FeaturedSection = async () => {
           </div>
         </div>
         <div className="w-full pl-8">
-          <CardProduct className="max-w-[349px] gap-6 w-full">
-            <ProductName className="text-[56px] leading-[58px]">
-              {product_1.name}
-            </ProductName>
-            <ProductDescrition className="text-[15px] leading-[25px]">
-              {product_1.description}
-            </ProductDescrition>
-            <Link href={`/product/${product_1.id}`}>
-              <Button
-                variant="default"
-                size="sm"
-                className="bg-black w-[160px] uppercase hover:text-black transition-all duration-300 hover:bg-transparent hover:border hover:border-solid hover:border-black mt-4"
-              >
-                See Product
-              </Button>
-            </Link>
+          <CardProduct>
+            <ProductInfo className="max-w-[349px] gap-6 w-full">
+              <ProductName className="text-[56px] leading-[58px]">
+                {product_1.name}
+              </ProductName>
+              <ProductDescription className="text-[15px] leading-[25px]">
+                {product_1.description}
+              </ProductDescription>
+              <Link href={`/product/${product_1.id}`}>
+                <Button
+                  variant="default"
+                  size="sm"
+                  className="bg-black w-[160px] uppercase hover:text-black transition-all duration-300 hover:bg-transparent hover:border hover:border-solid hover:border-black mt-4"
+                >
+                  See Product
+                </Button>
+              </Link>
+            </ProductInfo>
           </CardProduct>
         </div>
       </div>

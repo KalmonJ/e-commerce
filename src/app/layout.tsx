@@ -2,6 +2,8 @@ import { Advertising } from "@/components/Advertising";
 import "./globals.css";
 import { Manrope } from "next/font/google";
 import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { Hero } from "@/components/Hero";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--Manrope" });
 
