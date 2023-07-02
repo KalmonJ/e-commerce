@@ -10,6 +10,7 @@ export default function ProductLayout({
 }) {
   return (
     <section>
+      {/* @ts-ignore */}
       <Hero onlyHeader />
       {children}
     </section>
