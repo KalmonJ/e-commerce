@@ -1,15 +1,13 @@
 import Image from "next/image";
-import {
-  CardProduct,
-  ProductDescription,
-  ProductInfo,
-  ProductName,
-} from "./CardProduct";
+import { Product } from "./Product";
 import { Button } from "../ui/button";
 import { AspectRatio } from "../ui/aspect-ratio";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
+import { ProductInfo } from "./ProductInfo";
+import { ProductName } from "./ProductName";
+import { ProductDescription } from "./ProductDescription";
 
 export const FeaturedSection = async () => {
   const data = await db.product.findMany({
@@ -39,7 +37,7 @@ export const FeaturedSection = async () => {
           </div>
         </div>
         <div className="w-full pl-8">
-          <CardProduct>
+          <Product>
             <ProductInfo className="max-w-[349px] gap-6 w-full">
               <ProductName className="text-[56px] leading-[58px]">
                 {product_1.name}
@@ -57,7 +55,7 @@ export const FeaturedSection = async () => {
                 </Button>
               </Link>
             </ProductInfo>
-          </CardProduct>
+          </Product>
         </div>
       </div>
       <div className="w-full gap-8 h-[320px] flex flex-col justify-center  pl-16 bg-featured-section-speaker bg-no-repeat bg-cover">

@@ -1,14 +1,12 @@
-import {
-  CardProduct,
-  ProductDescription,
-  ProductInfo,
-  ProductName,
-} from "./products/CardProduct";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { Header } from "@/components/Header";
+import { Product } from "./products/Product";
+import { ProductInfo } from "./products/ProductInfo";
+import { ProductDescription } from "./products/ProductDescription";
+import { ProductName } from "./products/ProductName";
 
 type HeroProps = {
   category?: string;
@@ -43,7 +41,7 @@ export const Hero = async ({ onlyHeader, category }: HeroProps) => {
           </div>
         )}
         {!category && !onlyHeader && (
-          <CardProduct>
+          <Product>
             <ProductInfo className="max-w-[398px] w-full">
               <ProductDescription className="uppercase text-sm tracking-[10px]">
                 new product
@@ -60,7 +58,7 @@ export const Hero = async ({ onlyHeader, category }: HeroProps) => {
                 </Button>
               </Link>
             </ProductInfo>
-          </CardProduct>
+          </Product>
         )}
       </section>
     </section>

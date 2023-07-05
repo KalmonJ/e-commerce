@@ -1,9 +1,7 @@
-import {
-  CardProduct,
-  ProductDescription,
-  ProductInfo,
-  ProductName,
-} from "@/components/products/CardProduct";
+import { Product } from "@/components/products/Product";
+import { ProductDescription } from "@/components/products/ProductDescription";
+import { ProductInfo } from "@/components/products/ProductInfo";
+import { ProductName } from "@/components/products/ProductName";
 import { Button } from "@/components/ui/button";
 import { db } from "@/lib/db";
 import Image from "next/image";
@@ -29,7 +27,7 @@ export default async function Category({
     <section className="w-full flex items-center pt-40 flex-col">
       <div className="max-w-7xl w-full flex flex-col gap-40">
         {filteredByCategory.map((product, index) => (
-          <CardProduct
+          <Product
             className={`${index % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}
             productImage={
               <Image
@@ -55,7 +53,7 @@ export default async function Category({
                 <Button className="uppercase border-none">See Product</Button>
               </Link>
             </ProductInfo>
-          </CardProduct>
+          </Product>
         ))}
       </div>
     </section>
