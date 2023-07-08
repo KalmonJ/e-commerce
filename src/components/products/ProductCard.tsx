@@ -2,6 +2,7 @@
 
 import { Product } from "./Product";
 import Image from "next/image";
+import { ProductProvider } from "./context";
 
 export type ProductResponse = {
   thumbnail: string;
@@ -41,8 +42,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </Product.Description>
         <Product.Price price={product.price} />
         <div className="flex gap-4">
-          <Product.Increment />
-          <Product.Button />
+          <ProductProvider product={product}>
+            <Product.Increment />
+            <Product.Button />
+          </ProductProvider>
         </div>
       </Product.Info>
     </Product>

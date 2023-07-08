@@ -15,8 +15,14 @@ export async function POST(request: Request) {
       password: await hash(input.password, 10),
     };
 
-    await db.user.create({
+    const user = await db.user.create({
       data: { ...payload, image: faker.internet.avatar() },
+    });
+
+    await db.cart.create({
+      data: {
+        ownerId: user.id,
+      },
     });
 
     return NextResponse.json({ message: "user created successfully" });

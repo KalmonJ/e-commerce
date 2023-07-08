@@ -17,7 +17,6 @@ export const getServerSession = async () => {
 
     if (isPayload(payload)) {
       if (cachedUser) {
-        console.log("get user from cache");
         return cachedUser;
       }
 
@@ -42,6 +41,12 @@ export const getServerSession = async () => {
   } catch (error) {
     return null;
   }
+};
+
+export const createToken = (payload = {}, options: jwt.SignOptions) => {
+  const token = jwt.sign(payload, process.env.JWT_SECRET, options);
+
+  return token;
 };
 
 function isPayload(

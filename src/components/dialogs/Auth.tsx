@@ -1,12 +1,16 @@
 import { Dialog, DialogTrigger, DialogContent } from "../ui/dialog";
 import { AuthTabs } from "../AuthTabs";
-import { User2 } from "lucide-react";
+import { ReactNode } from "react";
 
-export const UserDialog = () => {
+type AuthProps = {
+  trigger: ReactNode
+}
+
+export const Auth = ({trigger}: AuthProps) => {
   return (
     <Dialog modal>
       <DialogTrigger>
-        <User2 color="#ffffff" />
+        {trigger}
       </DialogTrigger>
       <DialogContent className="pt-11">
         <AuthTabs />

@@ -1,3 +1,4 @@
+import { QueryProvider } from "@/app/_providers/QueryProvider";
 import { Hero } from "@/components/Hero";
 import { ReactNode } from "react";
 
@@ -12,7 +13,7 @@ export default function ProductLayout({
     <section>
       {/* @ts-ignore */}
       <Hero onlyHeader />
-      {children}
+      <QueryProvider>{children}</QueryProvider>
     </section>
   );
 }

@@ -1,15 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useProductContext } from "./useProductContext";
 
 export const ProductIncrement = () => {
-  const [quantity, setQuantity] = useState(1);
+  const { setProductQuantity, productQuantity } = useProductContext();
 
   const handleDecrement = () => {
-    if (quantity > 1) setQuantity(quantity - 1);
+    if (productQuantity > 1) setProductQuantity(productQuantity - 1);
   };
-
-  const handleIncrement = () => setQuantity(quantity + 1);
+  const handleIncrement = () => setProductQuantity(productQuantity + 1);
 
   return (
     <div className="max-w-[120px] items-center flex justify-around w-full h-12 bg-light-gray">
@@ -20,7 +19,7 @@ export const ProductIncrement = () => {
         -
       </button>
       <span className="text-black font-Manrope tracking-[1px] font-bold uppercase text-[13px]">
-        {quantity}
+        {productQuantity}
       </span>
       <button
         onClick={handleIncrement}

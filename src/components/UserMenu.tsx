@@ -26,7 +26,7 @@ export const UserMenu = async (props: UserMenuProps) => {
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="!z-[999999]">
         <DropdownMenuLabel>
           <div className="flex flex-col gap-1">
             <p className="text-sm leading-none  font-semibold">

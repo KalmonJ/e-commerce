@@ -1,9 +1,9 @@
 import { db } from "@/lib/db";
-import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { compare } from "bcrypt";
 import { authValidator } from "@/lib/validators/auth";
 import z from "zod";
+import { createToken } from "@/lib/auth";
 
 export async function POST(request: Request) {
   try {
@@ -32,13 +32,19 @@ export async function POST(request: Request) {
       });
     }
 
-    const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
-      expiresIn: 60 * 60,
-    });
+    const accessToken = createToken(
+      { userId: user.id },
+      {
+        expiresIn: 60 * 60,
+      }
+    );
 
-    const refreshToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
-      expiresIn: 60 * 60 * 5,
-    });
+    const refreshToken = createToken(
+      { userId: user.id },
+      {
+        expiresIn: 60 * 60 * 5,
+      }
+    );
 
     if (!user.session) {
       await db.session.create({
@@ -61,18 +67,31 @@ export async function POST(request: Request) {
       path: "/",
     });
 
-    return new Response(JSON.stringify({ message: "success" }), {
-      status: 200,
-    });
+    return new Response(
+      JSON.stringify({ message: "success", error: null, data: user }),
+      {
+        status: 200,
+      }
+    );
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return new Response(JSON.stringify({ message: error.message }), {
-        status: 400,
-      });
+      return new Response(
+        JSON.stringify({ message: "fail", error: error.message, data: null }),
+        {
+          status: 400,
+        }
+      );
     }
 
-    return new Response("Unknown error try again later", {
-      status: 500,
-    });
+    return new Response(
+      JSON.stringify({
+        message: "fail",
+        error: "Unknown error try again later",
+        data: null,
+      }),
+      {
+        status: 500,
+      }
+    );
   }
 }

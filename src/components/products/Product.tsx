@@ -20,6 +20,7 @@ export const Product = ({
   productImage,
   children,
 }: ProductProps) => {
+
   return (
     <div className={cn("flex items-center justify-between", className)}>
       {productImage && (

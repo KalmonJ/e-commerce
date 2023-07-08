@@ -14,18 +14,26 @@ import { FormField } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Auth, authValidator } from "@/lib/validators/auth";
+import { ApiResponse } from "@/types/api";
+import { User } from "@/types/user";
+import { userStore } from "@/stores/user";
 
 const login = async (input: Auth) => {
-  return fetch("/api/auth", {
+  const response = await fetch("/api/auth", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(input),
   });
+
+  const data: ApiResponse<User> = await response.json();
+  return data;
 };
 
 export const FormLogin = () => {
+  const setUser = userStore((state) => state.setUser);
+
   const form = useForm({
     resolver: zodResolver(authValidator),
     defaultValues: {
@@ -34,13 +42,12 @@ export const FormLogin = () => {
     },
   });
 
-  const onSubmit = async (values: Auth) =>
-    login(values)
-      .then(async (res) => {
-        const result = await res.json();
-        if (!res.ok) throw new Error(result.message);
-      })
-      .catch((err) => console.log(err.message));
+  const onSubmit = async (values: Auth) => {
+    const { data, message } = await login(values);
+
+    console.log(data, "loginnn");
+    if (message === "success") setUser(data);
+  };
 
   return (
     <Form {...form}>
